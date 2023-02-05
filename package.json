@@ -1,0 +1,15 @@
+{
+  "name": "postman-newman-jenkins",
+  "version": "1.0.0",
+  "description": "QA Test FIS project for postman tests",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "api-tests-production": "newman run tests/qaTest-FreightwaysCollections.postman_collection.json"
+  },
+  "author": "Leo",
+  "dependencies": {
+    "newman": "^5.3.2"
+  }
+}
