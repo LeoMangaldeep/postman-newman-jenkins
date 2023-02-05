@@ -3,7 +3,8 @@ FIS-QATests to run on postman-newsman-jenkins
 
 1. This repository contains JSON collections for the FIS technical test.
 2. Happy Path, Negative Path and Schema Validation is done in the project.
-3. This repo contains Test scenario doc, Test case sheet, Jenkins execution video. 
+3. This repo contains Test scenario doc, Test case sheet, Jenkins execution video.
+4. Json collection is in the tests folder.
 
 To run the APIs in the JSON collection,
 ## Software requirement
