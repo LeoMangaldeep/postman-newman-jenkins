@@ -1,0 +1,445 @@
+{
+	"info": {
+		"_postman_id": "fc1dfb4d-1e2f-4590-bfc2-dda41c1ea067",
+		"name": "qaTest-FreightwaysCollections",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25609013"
+	},
+	"item": [
+		{
+			"name": "qaPositiveTestScenario",
+			"item": [
+				{
+					"name": "qaTest",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json();",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"})",
+									"",
+									"//Schema Test",
+									"pm.test(\"Body contains all properties\", function(){",
+									"    //Check each object contains all properties",
+									"    for(let i=0; i<responseJson.length; i++){",
+									"        let obj = responseJson[i];",
+									"        pm.expect(responseJson.userId);",
+									"        pm.expect(responseJson.id);",
+									"        pm.expect(responseJson.title);",
+									"        pm.expect(responseJson.body);",
+									"    }",
+									"})",
+									"",
+									"//Schema Test",
+									"pm.test(\"All properties have datatype undefined\", function(){",
+									"    pm.expect(responseJson.userId).to.be.a('undefined');",
+									"    pm.expect(responseJson.id).to.be.a('undefined');",
+									"    pm.expect(responseJson.title).to.be.a('undefined');",
+									"    pm.expect(responseJson.body).to.be.a('undefined');",
+									"})",
+									" ",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json; charset=UTF-8",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{baseUrl}}/posts/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"posts",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "qaTest_ValidInput",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"})",
+									"",
+									"pm.test(\"Response body contains requested id\", function(){",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson.id).to.eql(pm.collectionVariables.get(\"getRequestId\"));",
+									"             ",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/posts/{{getRequestId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"posts",
+								"{{getRequestId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "qaTest_ValidInput",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"})",
+									"",
+									"pm.test(\"Response body contains requested id\", function(){",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson.id).to.eql(101);",
+									"    //Validating response payload matches request payload",
+									"    pm.expect(responseJson.title).to.eql(pm.collectionVariables.get(\"title\"));",
+									"    pm.expect(responseJson.body).to.eql(pm.collectionVariables.get(\"body\"));",
+									"    pm.expect(responseJson.userId).to.eql(pm.collectionVariables.get(\"userId\"));",
+									"})",
+									"",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"{{title}}\",\n    \"body\": \"{{body}}\",\n    \"userId\": {{userId}}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/posts/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"posts",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "qaTest_ValidInput",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"})",
+									"",
+									"pm.test(\"Response body contains requested id\", function(){",
+									"    const responseJson = pm.response.json();",
+									"    pm.expect(responseJson.id).to.eql(pm.collectionVariables.get(\"putRequestId\"));",
+									"    //Validating response payload matches request payload",
+									"    pm.expect(responseJson.title).to.eql(pm.collectionVariables.get(\"title\"));",
+									"    pm.expect(responseJson.body).to.eql(pm.collectionVariables.get(\"body\"));",
+									"    pm.expect(responseJson.userId).to.eql(pm.collectionVariables.get(\"userId\")); ",
+									"})",
+									"",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"{{title}}\",\n    \"body\": \"{{body}}\",\n    \"userId\": {{userId}}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/posts/{{putRequestId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"posts",
+								"{{putRequestId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "qaTest_ValidInput",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Because the API fakes delete request, it accepts any input, so the only possible test is to check status is 200",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"})",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/posts/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"posts",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"/*Schema Test",
+							"pm.test(\"Body is Json\", function(){",
+							"    pm.response.to.be.json;",
+							"})*/",
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "qaNegativeTestScenario",
+			"item": [
+				{
+					"name": "qaNegativeTest",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"})",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://jsonplaceholder.typicode.com/posts/idontexist",
+							"protocol": "https",
+							"host": [
+								"jsonplaceholder",
+								"typicode",
+								"com"
+							],
+							"path": [
+								"posts",
+								"idontexist"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"pm.collectionVariables.set(\"title\", \"today is saturday\");",
+					"pm.collectionVariables.set(\"body\", \"Auckland is flooding\");",
+					"pm.collectionVariables.set(\"userId\", 128);",
+					"",
+					"",
+					"//Positive Test Scenario-Set values for below ids between 1 and 100 for the test to pass ",
+					"pm.collectionVariables.set(\"putRequestId\", 45);",
+					"pm.collectionVariables.set(\"getRequestId\", 10);",
+					"",
+					"//Negative Test Scenario-Set values outside the range 1 to 100 for the test to pass ",
+					"pm.collectionVariables.set(\"negativeGetQaTest_ValidInput\",1000);",
+					"//Invalid input GET request-Use any special character for the test to pass",
+					"pm.collectionVariables.set(\"negativeGetQaTest_InValidInput\",'@'); ",
+					"//Invalid input PUT request-Use any datatype as input for the test to pass",
+					"pm.collectionVariables.set(\"negativePutQaTest_InValidInput\",'string');",
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"//Schema Test",
+					"pm.test(\"Body is Json\", function(){",
+					"    pm.response.to.be.json;",
+					"})",
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://jsonplaceholder.typicode.com"
+		},
+		{
+			"key": "putRequestId",
+			"value": ""
+		},
+		{
+			"key": "getRequestId",
+			"value": ""
+		},
+		{
+			"key": "title",
+			"value": ""
+		},
+		{
+			"key": "body",
+			"value": ""
+		},
+		{
+			"key": "userId",
+			"value": ""
+		},
+		{
+			"key": "negativeQaTest_ValidInput",
+			"value": ""
+		},
+		{
+			"key": "negativeQaTest_InValidInput",
+			"value": ""
+		},
+		{
+			"key": "negativeGetQaTest_ValidInput",
+			"value": ""
+		},
+		{
+			"key": "negativeGetQaTest_InValidInput",
+			"value": ""
+		},
+		{
+			"key": "negativePutQaTest_InValidInputId",
+			"value": ""
+		},
+		{
+			"key": "negativePutQaTest_InValidInput",
+			"value": ""
+		}
+	]
+}
